@@ -22,7 +22,7 @@ public class Packing {
     }
     
     public boolean addItem(int numCaixa, int item) { //Adiciona o item em uma caixa especifica
-        if ((calcularPesoTotalCaixa(numCaixa) + item) > tamMaxCaixa) {
+        if (numCaixa < 0 || (calcularPesoTotalCaixa(numCaixa) + item) > tamMaxCaixa) {
             return false; //Tamanho Máximo da caixa excedido
         }
         ArrayList<Integer> tempCaixa = listaCaixas.get(numCaixa);
@@ -37,6 +37,18 @@ public class Packing {
             if (addItem(i, item)) {
                 return true;
             }
+        }
+        
+        criarCaixa();
+        if (addItem(numCaixas - 1, item)) {
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean addItemUltimaCaixa(int item) { //Adiciona o item na última caixa, caso não tenha espaço suficiente cria uma nova caixa
+        if (addItem(numCaixas -1, item)) {
+            return true;
         }
         
         criarCaixa();

@@ -1,15 +1,16 @@
 package binpackingproblem;
+
 import java.util.Arrays;
 
 /**
  * @author Caroline, Yasmin e Bianca
  */
 
-public class FirstFitDecreasing {
+public class NextFitDecreasing {
     private int vetItens[];
     private int quantItens;
 
-    public FirstFitDecreasing(int[] vetItens) {
+    public NextFitDecreasing(int[] vetItens) {
         this.vetItens = vetItens;
         this.quantItens = vetItens.length;
     }
@@ -31,11 +32,11 @@ public class FirstFitDecreasing {
         }
     }
     
-    public Packing algoritmoFirstFitDecreasing(int tamanhoCaixa){
+    public Packing algoritmoNextFitDecreasing(int tamanhoCaixa){
         ordenacaoDecrescente(); //Ordena em ordem decrescente
         
-        FirstFit ff = new FirstFit(vetItens);
+        NextFit nf = new NextFit(vetItens);
         
-        return ff.algoritmoFirstFit(tamanhoCaixa);
+        return nf.algoritmoNextFit(tamanhoCaixa);
     }
 }

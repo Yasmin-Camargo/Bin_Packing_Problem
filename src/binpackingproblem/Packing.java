@@ -1,4 +1,7 @@
 package binpackingproblem;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -28,7 +31,7 @@ public class Packing {
         ArrayList<Integer> tempCaixa = listaCaixas.get(numCaixa);
         tempCaixa.add(item);
         
-        System.out.println("Item " + item + " adicionado na caixa " + (numCaixa + 1));
+        //System.out.println("Item " + item + " adicionado na caixa " + (numCaixa + 1));
         return true;
     }
     
@@ -94,6 +97,30 @@ public class Packing {
         double porcentagemUsoTotal = (double) pesoTotalItens / (tamMaxCaixa * numCaixas) * 100.0;
 
         return porcentagemUsoTotal;
+    }
+    
+    public void exportarDados(String nomeAlgoritmo, String nomeArquivo){
+        String caminhoCompleto = ".//src//dataSet//Resultado_" +nomeAlgoritmo+ "_" +nomeArquivo+ ".csv";
+        try (BufferedWriter arquivo = new BufferedWriter(new FileWriter(caminhoCompleto))) {
+            
+            arquivo.write("Algoritmo; Capacidade Máxima; Nome do Arquivo\n");
+            arquivo.write(nomeAlgoritmo + ";" + tamMaxCaixa + ";" + nomeArquivo + "\n\nCaixas:\n");
+
+            for (int i = 0; i < listaCaixas.size(); i++) {
+                ArrayList<Integer> caixaAtual = listaCaixas.get(i);
+                for (int j = 0; j < caixaAtual.size(); j++) {
+                    arquivo.write(caixaAtual.get(j).toString());
+                    if (j < caixaAtual.size() - 1) {
+                        arquivo.write(";");
+                    }
+                }
+                arquivo.write("\n");
+            }
+
+            //System.out.println("\nArquivo CSV criado com sucesso: " + caminhoCompleto);
+        } catch (IOException e) {
+            System.out.println("ERRO ao criar arquivo");
+        }
     }
     
     @Override

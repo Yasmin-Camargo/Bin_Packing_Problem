@@ -14,7 +14,7 @@ public class NextFit {
     }
     
     public Packing algoritmoNextFit(int tamanhoCaixa){
-        printVetorItens();
+        //printVetorItens();
         Packing minhasCaixas = new Packing(tamanhoCaixa);
         
         for (int i = 0; i < quantItens; i++) { //Adicionando itens

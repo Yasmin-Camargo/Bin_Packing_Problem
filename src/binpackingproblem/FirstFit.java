@@ -1,13 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package binpackingproblem;
 
 /**
  *
  * @author Caroline, Yasmin e Bianca
  */
+
 public class FirstFit {
     private int vetItens[];
     private int quantItens;
@@ -18,7 +15,6 @@ public class FirstFit {
     }
     
     public Packing algoritmoFirstFit(int tamanhoCaixa){
-        printVetorItens();
         Packing minhasCaixas = new Packing(tamanhoCaixa);
         
         for (int i = 0; i < quantItens; i++) { //Adicionando itens

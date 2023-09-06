@@ -65,7 +65,12 @@ public class Packing {
         return listaCaixas;
     }
     
-    private int calcularPesoTotalCaixa(int indiceCaixa){
+    public int getQuantItensCaixa(int i){
+        ArrayList<Integer> caixaAtual = listaCaixas.get(i);
+        return caixaAtual.size();
+    }
+    
+    public int calcularPesoTotalCaixa(int indiceCaixa){
         int tamanho = 0;
         ArrayList<Integer> caixaAtual = listaCaixas.get(indiceCaixa);
         
@@ -100,7 +105,7 @@ public class Packing {
     }
     
     public void exportarDados(String nomeAlgoritmo, String nomeArquivo){
-        String caminhoCompleto = ".//src//dataSet//Resultado_" +nomeAlgoritmo+ "_" +nomeArquivo+ ".csv";
+        String caminhoCompleto = ".//src//dataSet//resultados//resultado_" +nomeAlgoritmo+ "_" +nomeArquivo+ ".csv";
         try (BufferedWriter arquivo = new BufferedWriter(new FileWriter(caminhoCompleto))) {
             
             arquivo.write("Algoritmo; Capacidade Máxima; Nome do Arquivo\n");

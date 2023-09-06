@@ -38,4 +38,12 @@ public class FirstFitDecreasing {
         
         return ff.algoritmoFirstFit(tamanhoCaixa);
     }
+    
+    public Packing algoritmoFirstFitDecreasing(int tamanhoCaixa, Packing minhaCaixa){
+        ordenacaoDecrescente(); //Ordena em ordem decrescente
+        
+        FirstFit ff = new FirstFit(vetItens);
+        
+        return ff.algoritmoFirstFit(tamanhoCaixa, minhaCaixa);
+    }
 }

@@ -38,5 +38,5 @@ public class NextFitDecreasing {
         NextFit nf = new NextFit(vetItens);
         
         return nf.algoritmoNextFit(tamanhoCaixa);
-    }
+    }    
 }

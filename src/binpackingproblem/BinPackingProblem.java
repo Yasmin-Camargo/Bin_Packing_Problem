@@ -27,8 +27,14 @@ public class BinPackingProblem {
     public static void main(String[] args) throws IOException {
         Scanner entrada = new Scanner(System.in);
         int tamanhoCaixa = 100, op = 0;
-        int vet[];   
-        String nomeArquivo = "02";
+                        /*Vetor construido para ser ótimo e ocupar exatamente 100% de 40 caixas de tamanho 100, 
+                        Vetor original: {43,32,25,10,45,45,20,20,60,15,40,45,50,10,40,30,35,35,12,28,60,40,30,30,25,50,25,38,22,40,48,25,27,55,15,30,33,33,34,22,40,38,10,30,60,20,50,30,45,45,10,30,20,50,35,35,30,27,40,33,100,40,60,25,30,45,10,20,30,40,15,25,30,10,20,20,15,25,30,10,5,15,20,10,25,25,30,20,10,15,5,20,10,15,10,25,20,10,10,30,20,25,10,5,5,5,25,25,20,30,12,38,10,20,20,15,25,15,15,10,20,5,10,15,10,20,10,30,30,25,15,10,10,10,40,30,15,10,5,20,25,25,15,10,5,10,20,20,30,10,10,15,15,15,15,20,5,10,5,25,10,20,10,10,15,10};
+                        Vetor embaralhado:*/    
+        int vet[] = {60, 15, 30, 30, 5, 10, 10, 15, 15, 45, 50, 20, 25, 10, 30, 40, 20, 20, 25, 10, 30, 40, 10, 5, 20, 20, 30, 30, 45, 30, 25, 10, 10, 25, 15, 10, 20, 10, 30, 30, 25, 15, 10, 10, 10, 25, 25, 20, 30, 12, 38, 10, 20, 20, 15, 25, 15, 15, 10, 20, 5, 10, 15, 10, 20, 10, 30, 30, 25, 15, 10, 10, 10, 40, 30, 15, 10, 5, 20, 25, 25, 15, 10, 5, 10, 20, 20, 30, 10, 10, 15, 15, 15, 15, 20, 5, 10, 5, 25, 10, 20, 10, 10, 15, 10, 43, 32, 25, 10, 45, 45, 20, 20, 60, 15, 40, 45, 50, 10, 40, 30, 35, 35, 12, 28, 60, 40, 30, 30, 25, 50, 25, 38, 22, 40, 48, 25, 27, 55, 15, 30, 33, 33, 34, 22, 40, 38, 10, 30, 60, 20, 50, 30, 45, 45, 10, 30, 20, 50, 35, 35, 30, 27, 40, 33, 100, 40, 60, 25, 30, 45, 10, 20, 30, 40, 15, 25, 30, 10, 20, 20, 15, 25, 30, 10, 5, 15, 20, 10, 25, 25, 30, 20, 10, 15, 5, 20, 10, 15, 10, 25, 20, 10, 10, 30, 20, 25, 10, 5, 5, 5, 25, 25, 20, 30, 12, 38, 10, 20, 20, 15, 25, 15, 15, 10, 20, 5, 10, 15, 10, 20, 10, 30, 30, 25, 15, 10, 10, 10, 40, 30, 15, 10, 5, 20, 25, 25, 15, 10, 5, 10, 20, 20, 30, 10, 10, 15, 15, 15, 15, 20, 5, 10, 5, 25, 10, 20, 10, 10, 15, 10};
+
+                    
+
+        String nomeArquivo = "vetPrograma";
         
         if (args.length == 3) { 
             tamanhoCaixa = Integer.parseInt(args[0]);
@@ -54,7 +60,7 @@ public class BinPackingProblem {
         }
         
         String caminhoArquivo = ".//src//dataSet//" +nomeArquivo+ ".txt";
-        vet = leituraArquivo(caminhoArquivo);
+        //vet = leituraArquivo(caminhoArquivo);
          
         while (op != 0) { 
             Packing caixa;
@@ -117,12 +123,20 @@ public class BinPackingProblem {
                     caixa.exportarDados("First_Fit_Decreasing", nomeArquivo);
                     System.out.println(caixa);
                     break;
+                
+                case 7: //Modified First Fit Decreasing (MFFD)
+                    System.out.println("\n\n--- Modified First Fit Decreasing ---");
+                    ModifiedFirstFitDecreasing mffd = new ModifiedFirstFitDecreasing(vet);
+                    caixa = mffd.algoritmoModifiedFirstFitDecreasing(tamanhoCaixa);
+                    caixa.exportarDados("Modified_First_Fit_Decreasing", nomeArquivo);
+                    System.out.println(caixa);
+                    break;
                  
-                case 7:
+                case 8:
                     aplicacaoReal();
                     break;
                     
-                case 8:
+                case 9:
                     gerarMediaTempoExecucao(1000, tamanhoCaixa, vet, nomeArquivo);
                     break;
                     
@@ -144,11 +158,12 @@ public class BinPackingProblem {
         System.out.println("\t 4) First Fit (FF)");
         System.out.println("\t 5) Next Fit Decreasing (NFD)");
         System.out.println("\t 6) First Fit Decreasing (FFD)");
-        System.out.println("\t 7) Extra: Aplicacao real");
-        System.out.println("\t 8) Gerar media tempo execucao");
+        System.out.println("\t 7) Modified First Fit Decreasing (MFFD)");
+        System.out.println("\t 8) Extra: Aplicacao real");
+        System.out.println("\t 9) Gerar media tempo execucao");
         System.out.println("\t 0) sair");
         opMenu = entrada.nextInt();
-        if (opMenu >= 0 && opMenu <= 8){
+        if (opMenu >= 0 && opMenu <= 9){
             return opMenu;
         }
         return -1;
@@ -189,7 +204,7 @@ public class BinPackingProblem {
     }
     
     public static void gerarMediaTempoExecucao(int repeticoes, int tamanhoCaixa, int vet[], String nome){
-        String caminhoCompleto = ".//src//dataSet//tempoExecucao_"+ nome +".csv";
+        String caminhoCompleto = ".//src//dataSet//tempoExecucaoSimulacoes//tempoExecucao_"+ nome +".csv";
         long tempoTotal = 0;
         try (BufferedWriter arquivo = new BufferedWriter(new FileWriter(caminhoCompleto))) {
             
@@ -262,6 +277,23 @@ public class BinPackingProblem {
                 tempoTotal += (long) tempoDecorrido;
             }
             System.out.println("\nTempo Medio First Fit Decreasing");
+            System.out.println("Nanossegundos: " + (tempoTotal/repeticoes));
+            System.out.println("Milissegundos: " + (tempoTotal/repeticoes) / 1_000_000);
+            System.out.println("Segundos: " + (tempoTotal/repeticoes) / 1_000_000_000);
+            
+            for (int i = 0; i < repeticoes; i++) {
+                long tempoInicial = System.nanoTime();
+                ModifiedFirstFitDecreasing mffd = new ModifiedFirstFitDecreasing(vet);
+                mffd.algoritmoModifiedFirstFitDecreasing(tamanhoCaixa);
+                long tempoFinal = System.nanoTime();
+                long tempoDecorrido = (long) (tempoFinal - tempoInicial);
+                
+                String temp = "" + tempoDecorrido;
+                arquivo.write("ModifiedFirstFitDecreasing;" + temp);
+                arquivo.write("\n");
+                tempoTotal += (long) tempoDecorrido;
+            }
+            System.out.println("\nTempo Medio Modified First Fit Decreasing");
             System.out.println("Nanossegundos: " + (tempoTotal/repeticoes));
             System.out.println("Milissegundos: " + (tempoTotal/repeticoes) / 1_000_000);
             System.out.println("Segundos: " + (tempoTotal/repeticoes) / 1_000_000_000);

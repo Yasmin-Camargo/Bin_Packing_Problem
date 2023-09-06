@@ -37,7 +37,7 @@ public class BinPackingProblem {
                                                                         dataSet4_FSU_tamanho524                 524
                                                                         dataSet76_Schwerin_tamanho1000          1000
                                                                         dataSet100_Schwerin_tamanho1000         1000
-                                                                        exemploGerado_40caixas_tamanho100       100
+                                                                        exemploGerado_60caixas_tamanho100       100
         */
         
         if (args.length == 3) { 
@@ -48,12 +48,18 @@ public class BinPackingProblem {
                 op = 3;
             } else if (str.equals("FF")) {
                 op = 4;
-            } else if (str.equals("NFD")) {
+            } else if (str.equals("BF")) {
                 op = 5;
-            } else if (str.equals("FFD")) {
+            } else if (str.equals("NFD")) {
                 op = 6;
-            } else if (str.equals("extra")){
+            } else if (str.equals("FFD")) {
                 op = 7;
+            } else if (str.equals("MFFD")) {
+                op = 8;
+            } else if (str.equals("BFD")) {
+                op = 9;
+            } else if (str.equals("extra")){
+                op = 10;
             }
             
             nomeArquivo = args[2];
@@ -157,7 +163,7 @@ public class BinPackingProblem {
                     break;
                     
                 case 11:
-                    gerarMediaTempoExecucao(1000, tamanhoCaixa, vet, nomeArquivo);
+                    gerarMediaTempoExecucao(10000, tamanhoCaixa, vet, nomeArquivo);
                     break;
                     
                 default:

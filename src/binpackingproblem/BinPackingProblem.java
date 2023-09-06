@@ -30,7 +30,7 @@ public class BinPackingProblem {
         int vet[];
                     
 
-        String nomeArquivo = "dataSet3_FSU_tamanho100"; /*              nome                             tamanhocaixa     -> Arquivos disponíveis para teste
+        String nomeArquivo = "exemploGerado_60caixas_tamanho100"; /*    nome                             tamanhocaixa     -> Arquivos disponíveis para teste
                                                                         dataSet1_FSU_tamanho100                 100
                                                                         dataSet2_FSU_tamanho100                 100
                                                                         dataSet3_FSU_tamanho100                 100
@@ -38,7 +38,6 @@ public class BinPackingProblem {
                                                                         dataSet76_Schwerin_tamanho1000          1000
                                                                         dataSet100_Schwerin_tamanho1000         1000
                                                                         exemploGerado_40caixas_tamanho100       100
-        
         */
         
         if (args.length == 3) { 
@@ -112,8 +111,16 @@ public class BinPackingProblem {
                     caixa.exportarDados("First_Fit", nomeArquivo);
                     System.out.println(caixa);
                     break;
-                
-                case 5: //Next Fit Decreasing (NFD)
+                    
+                case 5: //Best Fit (BF)
+                    System.out.println("\n\n--- Best Fit ---");
+                    BestFit bf = new BestFit(vet);
+                    caixa = bf.algoritmoBestFit(tamanhoCaixa);
+                    caixa.exportarDados("Best_Fit", nomeArquivo);
+                    System.out.println(caixa);
+                    break;
+                    
+                case 6: //Next Fit Decreasing (NFD)
                     System.out.println("\n\n--- Next Fit Decreasing ---");
                     NextFitDecreasing nfd = new NextFitDecreasing(vet);
                     caixa = nfd.algoritmoNextFitDecreasing(tamanhoCaixa);
@@ -121,7 +128,7 @@ public class BinPackingProblem {
                     System.out.println(caixa);
                     break;
                     
-                case 6: //First Fit Decreasing (FFD)
+                case 7: //First Fit Decreasing (FFD)
                     System.out.println("\n\n--- First Fit Decreasing ---");
                     FirstFitDecreasing ffd = new FirstFitDecreasing(vet);
                     caixa = ffd.algoritmoFirstFitDecreasing(tamanhoCaixa);
@@ -129,19 +136,27 @@ public class BinPackingProblem {
                     System.out.println(caixa);
                     break;
                 
-                case 7: //Modified First Fit Decreasing (MFFD)
+                case 8: //Modified First Fit Decreasing (MFFD)
                     System.out.println("\n\n--- Modified First Fit Decreasing ---");
                     ModifiedFirstFitDecreasing mffd = new ModifiedFirstFitDecreasing(vet);
                     caixa = mffd.algoritmoModifiedFirstFitDecreasing(tamanhoCaixa);
                     caixa.exportarDados("Modified_First_Fit_Decreasing", nomeArquivo);
                     System.out.println(caixa);
                     break;
+                    
+                case 9: //Best Fit Decreasing (BFD)
+                    System.out.println("\n\n--- Modified First Fit Decreasing ---");
+                    BestFitDecreasing bfd = new BestFitDecreasing(vet);
+                    caixa = bfd.algoritmoBestFitDecreasing(tamanhoCaixa);
+                    caixa.exportarDados("Best Fit Decreasing", nomeArquivo);
+                    System.out.println(caixa);
+                    break;
                  
-                case 8:
+                case 10:
                     aplicacaoReal();
                     break;
                     
-                case 9:
+                case 11:
                     gerarMediaTempoExecucao(1000, tamanhoCaixa, vet, nomeArquivo);
                     break;
                     
@@ -161,14 +176,16 @@ public class BinPackingProblem {
         System.out.println("\t 2) Alterar tamanho da Caixa");
         System.out.println("\t 3) Next Fit (NF)");
         System.out.println("\t 4) First Fit (FF)");
-        System.out.println("\t 5) Next Fit Decreasing (NFD)");
-        System.out.println("\t 6) First Fit Decreasing (FFD)");
-        System.out.println("\t 7) Modified First Fit Decreasing (MFFD)");
-        System.out.println("\t 8) Extra: Aplicacao real");
-        System.out.println("\t 9) Gerar media tempo execucao");
+        System.out.println("\t 5) Best Fit (BF)");
+        System.out.println("\t 6) Next Fit Decreasing (NFD)");
+        System.out.println("\t 7) First Fit Decreasing (FFD)");
+        System.out.println("\t 8) Modified First Fit Decreasing (MFFD)");
+        System.out.println("\t 9) Best Fit Decreasing(BFD)");
+        System.out.println("\t 10) Extra: Aplicacao real");
+        System.out.println("\t 11) Gerar media tempo execucao");
         System.out.println("\t 0) sair");
         opMenu = entrada.nextInt();
-        if (opMenu >= 0 && opMenu <= 9){
+        if (opMenu >= 0 && opMenu <= 11){
             return opMenu;
         }
         return -1;
@@ -246,6 +263,21 @@ public class BinPackingProblem {
             System.out.println("\nTempo Medio First Fit");
             System.out.println("Nanossegundos: " + (tempoTotal/repeticoes));
             
+            for (int i = 0; i < repeticoes; i++) {
+                long tempoInicial = System.nanoTime();
+                BestFit bf = new BestFit(vet);
+                bf.algoritmoBestFit(tamanhoCaixa);
+                long tempoFinal = System.nanoTime();
+                long tempoDecorrido = (long) (tempoFinal - tempoInicial);
+                
+                String temp = "" + tempoDecorrido;
+                arquivo.write("BestFit;" + temp);
+                arquivo.write("\n");
+                tempoTotal += (long) tempoDecorrido;
+            }
+            System.out.println("\nTempo Best Fit Decreasing");
+            System.out.println("Nanossegundos: " + (tempoTotal/repeticoes));
+            
             
             for (int i = 0; i < repeticoes; i++) {
                 long tempoInicial = System.nanoTime();
@@ -290,6 +322,21 @@ public class BinPackingProblem {
                 tempoTotal += (long) tempoDecorrido;
             }
             System.out.println("\nTempo Medio Modified First Fit Decreasing");
+            System.out.println("Nanossegundos: " + (tempoTotal/repeticoes));
+            
+            for (int i = 0; i < repeticoes; i++) {
+                long tempoInicial = System.nanoTime();
+                BestFitDecreasing bfd = new BestFitDecreasing(vet);
+                bfd.algoritmoBestFitDecreasing(tamanhoCaixa);
+                long tempoFinal = System.nanoTime();
+                long tempoDecorrido = (long) (tempoFinal - tempoInicial);
+                
+                String temp = "" + tempoDecorrido;
+                arquivo.write("BestFitDecreasing;" + temp);
+                arquivo.write("\n");
+                tempoTotal += (long) tempoDecorrido;
+            }
+            System.out.println("\nTempo Best Fit Decreasing");
             System.out.println("Nanossegundos: " + (tempoTotal/repeticoes));
             
         } catch (IOException e) {

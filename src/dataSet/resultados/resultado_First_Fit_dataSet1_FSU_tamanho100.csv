@@ -1,9 +1,8 @@
 Algoritmo; Capacidade Máxima; Nome do Arquivo
-First_Fit;80;dataSet1_FSU_tamanho100
+First_Fit;100;dataSet1_FSU_tamanho100
 
 Caixas:
-70;7;3
-60;11
-50
-33;33
+70;11;7;3
+60;33
+50;33
 33

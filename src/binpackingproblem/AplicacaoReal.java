@@ -1,29 +1,35 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package binpackingproblem;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
- *
- * @author yasmi
+ * @author Caroline, Yasmin e Bianca
  */
+
 public class AplicacaoReal {
-    public static void aplicacaoReal() throws IOException{
-        /* Exemplo prático de bin packing problem: 
+    /* Exemplo prático de bin packing problem: 
         Quero assistir todos filmes da marvel no menor número de dias possíveis(não estou preucupada com a ordem cronologica), 
         sendo que eu não gosto de parar um filme pela metade e tenho disponível 6 horas por dia para fazer isso. 
         Qual é a melhor forma de assistir?
-        */
+    */
+    int limiteMinutos; //6 Horas por dia
+    String caminho_arquivo;
+
+    public AplicacaoReal() {
+        limiteMinutos = 60 * 6; //6 Horas por dia
+        caminho_arquivo = ".//src//dataSet//filmesMarvel.csv";
+    }
+    
+    public AplicacaoReal(int tempo, String nomeArquivo) {
+        limiteMinutos = tempo; //6 Horas por dia
+        caminho_arquivo = ".//src//dataSet//"+ nomeArquivo +".csv";
+    }
         
-        int limiteMinutos = 60 * 6; //6 Horas por dia
-        String caminho_arquivo = ".//src//dataSet//filmesMarvel.csv";
-        
+    public void executar() throws IOException {
         // Abre o arquivo
         BufferedReader arquivo = null;
         try {
@@ -39,6 +45,7 @@ public class AplicacaoReal {
         }
                 
         arquivo.close();
+        
         try {
             arquivo = new BufferedReader(new FileReader(caminho_arquivo));   
         } catch (IOException e) {
@@ -60,22 +67,79 @@ public class AplicacaoReal {
         }
         
         int filmes[] = duracaoFilmes.clone();
-        FirstFitDecreasing ffd = new FirstFitDecreasing(filmes);
-        Packing tempCaixa = ffd.algoritmoFirstFitDecreasing(limiteMinutos);
-        ArrayList<ArrayList<Integer>>  ordemAssistir = tempCaixa.getListaCaixas();
+        Packing tempCaixa = null;
+        String nomeAlgoritmo = "";
         
-        System.out.println("\n\n\n");
+        int op = menu();
+        switch (op) {
+            case 1: //Next Fit (NF)
+                System.out.println("\n--- Next Fit ---");
+                nomeAlgoritmo = "NextFit";
+                NextFit nf = new NextFit(filmes);
+                tempCaixa = nf.algoritmoNextFit(limiteMinutos);
+                break;
+
+            case 2: //First Fit (FF)
+                System.out.println("\n\n--- First Fit ---");
+                nomeAlgoritmo = "FirstFit";
+                FirstFit ff = new FirstFit(filmes);
+                tempCaixa = ff.algoritmoFirstFit(limiteMinutos);
+                break;
+
+            case 3: //Best Fit (BF)
+                System.out.println("\n\n--- Best Fit ---");
+                nomeAlgoritmo = "BestFit";
+                BestFit bf = new BestFit(filmes);
+                tempCaixa = bf.algoritmoBestFit(limiteMinutos);
+                break;
+
+            case 4: //Next Fit Decreasing (NFD)
+                System.out.println("\n\n--- Next Fit Decreasing ---");
+                nomeAlgoritmo = "NextFitDecreasing";
+                NextFitDecreasing nfd = new NextFitDecreasing(filmes);
+                tempCaixa = nfd.algoritmoNextFitDecreasing(limiteMinutos);
+                break;
+
+            case 5: //First Fit Decreasing (FFD)
+                System.out.println("\n\n--- First Fit Decreasing ---");
+                nomeAlgoritmo = "FirstFitDecreasing";
+                FirstFitDecreasing ffd = new FirstFitDecreasing(filmes);
+                tempCaixa = ffd.algoritmoFirstFitDecreasing(limiteMinutos);
+                break;
+
+            case 6: //Modified First Fit Decreasing (MFFD)
+                System.out.println("\n\n--- Modified First Fit Decreasing ---");
+                nomeAlgoritmo = "ModifiedFirstFitDecreasing";
+                ModifiedFirstFitDecreasing mffd = new ModifiedFirstFitDecreasing(filmes);
+                tempCaixa = mffd.algoritmoModifiedFirstFitDecreasing(limiteMinutos);
+                break;
+
+            case 7: //Best Fit Decreasing (BFD)
+                System.out.println("\n\n--- Modified First Fit Decreasing ---");
+                nomeAlgoritmo = "ModifiedFirstFitDecreasing";
+                BestFitDecreasing bfd = new BestFitDecreasing(filmes);
+                tempCaixa = bfd.algoritmoBestFitDecreasing(limiteMinutos);
+                break;
+
+            default:
+                System.out.println("\n\n DIGITE UM NUMERO VALIDO!!!\n");
+                break;
+        }
+        
+        ArrayList<ArrayList<Integer>> ordemAssistir = tempCaixa.getListaCaixas();
+        
         for (int i = 0; i < ordemAssistir.size(); i++) {
-            System.out.println("\n\n--- Dia " + i + " ---");
+            System.out.println("\n\n--- Dia " + (i + 1) + " ---");
             ArrayList<Integer> vetTemp = ordemAssistir.get(i);
             for (int j = 0; j < vetTemp.size(); j++) {
-                System.out.println(nomesFilmes[encontraFilme(vetTemp.get(j), duracaoFilmes)]);
+                int temp = encontraFilme(vetTemp.get(j), duracaoFilmes);
+                System.out.println(nomesFilmes[temp] + " (" + vetTemp.get(j) + " minutos)");
             }
         }
-        tempCaixa.exportarDados("filmesMarvel", "filmesMarvel");
+        tempCaixa.exportarDados(nomeAlgoritmo, "filmesMarvel");
     }
     
-    public static int encontraFilme(int num, int[] assistidos){
+    public int encontraFilme(int num, int[] assistidos){
         for (int i = 0; i < assistidos.length; i++) {
             if (assistidos[i] == num) {
                 assistidos[i] = -1; //Já olhou
@@ -84,4 +148,23 @@ public class AplicacaoReal {
         }
         return 0;
     }
+    
+    public int menu(){
+        Scanner entrada = new Scanner(System.in);
+        int opMenu;
+        System.out.println("\n\n\tESCOLHA O ALGORITMO");
+        System.out.println("\t 1 - Next Fit (NF)");
+        System.out.println("\t 2 - First Fit (FF)");
+        System.out.println("\t 3 - Best Fit (BF)");
+        System.out.println("\t 4 - Next Fit Decreasing (NFD)");
+        System.out.println("\t 5 - First Fit Decreasing (FFD)");
+        System.out.println("\t 6 - Modified First Fit Decreasing (MFFD)");
+        System.out.println("\t 7 - Best Fit Decreasing(BFD)");
+        opMenu = entrada.nextInt();
+        if (opMenu >= 0 && opMenu <= 11){
+            return opMenu;
+        }
+        return -1;
+    }
 }
+

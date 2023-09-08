@@ -1,12 +1,12 @@
 Algoritmo; Capacidade Máxima; Nome do Arquivo
-filmesMarvel;360;filmesMarvel
+ModifiedFirstFitDecreasing;360;filmesMarvel
 
 Caixas:
 357
-324;32
+324;25
 315;41
 300;54
-297;25
+297;19
 294
 287
 271
@@ -18,10 +18,10 @@ Caixas:
 141;136
 136;134
 134;133
-130;130
-129;126
-126;124
+132;130
+130;129
+126;126
 124;124;112
-123;121;115
-119;118;117
-115;112
+124;123;112
+121;119;118
+117;115;115

@@ -10,11 +10,9 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- *
  * @author Caroline, Yasmin e Bianca
  */
 
@@ -26,11 +24,11 @@ public class BinPackingProblem {
     
     public static void main(String[] args) throws IOException {
         Scanner entrada = new Scanner(System.in);
-        int tamanhoCaixa = 100, op = 0;
+        int tamanhoCaixa = 80, op = 0;
         int vet[];
                     
 
-        String nomeArquivo = "exemploGerado_60caixas_tamanho100"; /*    nome                             tamanhocaixa     -> Arquivos disponíveis para teste
+        String nomeArquivo = "exemploGerado_18caixas_tamanho80"; /*    nome                             tamanhocaixa     -> Arquivos disponíveis para teste
                                                                         exemploGerado_18caixas_tamanho80        80
                                                                         dataSet1_FSU_tamanho100                 100
                                                                         dataSet2_FSU_tamanho100                 100
@@ -160,7 +158,8 @@ public class BinPackingProblem {
                     break;
                  
                 case 10:
-                    AplicacaoReal.aplicacaoReal();
+                    AplicacaoReal simulacao = new AplicacaoReal();
+                    simulacao.executar();
                     break;
                     
                 case 11:

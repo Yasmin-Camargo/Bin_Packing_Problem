@@ -31,6 +31,7 @@ public class BinPackingProblem {
                     
 
         String nomeArquivo = "exemploGerado_60caixas_tamanho100"; /*    nome                             tamanhocaixa     -> Arquivos disponíveis para teste
+                                                                        exemploGerado_18caixas_tamanho80        80
                                                                         dataSet1_FSU_tamanho100                 100
                                                                         dataSet2_FSU_tamanho100                 100
                                                                         dataSet3_FSU_tamanho100                 100
@@ -281,9 +282,23 @@ public class BinPackingProblem {
                 arquivo.write("\n");
                 tempoTotal += (long) tempoDecorrido;
             }
-            System.out.println("\nTempo Best Fit Decreasing");
+            System.out.println("\nTempo Best Fit");
             System.out.println("Nanossegundos: " + (tempoTotal/repeticoes));
             
+            for (int i = 0; i < repeticoes; i++) {
+                long tempoInicial = System.nanoTime();
+                BestFitDecreasing bfd = new BestFitDecreasing(vet);
+                bfd.algoritmoBestFitDecreasing(tamanhoCaixa);
+                long tempoFinal = System.nanoTime();
+                long tempoDecorrido = (long) (tempoFinal - tempoInicial);
+                
+                String temp = "" + tempoDecorrido;
+                arquivo.write("BestFitDecreasing;" + temp);
+                arquivo.write("\n");
+                tempoTotal += (long) tempoDecorrido;
+            }
+            System.out.println("\nTempo Best Fit Decreasing");
+            System.out.println("Nanossegundos: " + (tempoTotal/repeticoes));
             
             for (int i = 0; i < repeticoes; i++) {
                 long tempoInicial = System.nanoTime();
@@ -330,20 +345,6 @@ public class BinPackingProblem {
             System.out.println("\nTempo Medio Modified First Fit Decreasing");
             System.out.println("Nanossegundos: " + (tempoTotal/repeticoes));
             
-            for (int i = 0; i < repeticoes; i++) {
-                long tempoInicial = System.nanoTime();
-                BestFitDecreasing bfd = new BestFitDecreasing(vet);
-                bfd.algoritmoBestFitDecreasing(tamanhoCaixa);
-                long tempoFinal = System.nanoTime();
-                long tempoDecorrido = (long) (tempoFinal - tempoInicial);
-                
-                String temp = "" + tempoDecorrido;
-                arquivo.write("BestFitDecreasing;" + temp);
-                arquivo.write("\n");
-                tempoTotal += (long) tempoDecorrido;
-            }
-            System.out.println("\nTempo Best Fit Decreasing");
-            System.out.println("Nanossegundos: " + (tempoTotal/repeticoes));
             
         } catch (IOException e) {
             System.out.println("ERRO ao criar arquivo");

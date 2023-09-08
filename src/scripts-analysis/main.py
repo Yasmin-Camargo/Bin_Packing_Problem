@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # Pasta que contém os arquivos de dados
-pasta_arquivos = '../src/dataSet'
+pasta_arquivos = '../dataSet/resultados'
 
 # Variáveis 
 dados_eixoX = []  # Armazena os dados do eixo X (conteudo de cada caixa)
@@ -61,5 +61,5 @@ for nome_arquivo in todos_arquivos:
     plt.ylabel('Capacidade')
     plt.xlabel('Número da caixa')
     plt.ylim(0, capacidade_maxima + 1)  # Define o intervalo do eixo Y (mínimo e máximo)
-    plt.show()
     plt.savefig(f'graficos/{algoritmo} - Arquivo {experimento}')
+    plt.show()

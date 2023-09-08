@@ -136,6 +136,8 @@ public class AplicacaoReal {
                 System.out.println(nomesFilmes[temp] + " (" + vetTemp.get(j) + " minutos)");
             }
         }
+        
+        BinPackingProblem.executaPython(nomeAlgoritmo + "_filmesMarvel");
         tempCaixa.exportarDados(nomeAlgoritmo, "filmesMarvel");
     }
     

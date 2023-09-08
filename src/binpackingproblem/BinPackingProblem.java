@@ -26,7 +26,7 @@ public class BinPackingProblem {
     public static void main(String[] args) throws IOException {
         Scanner entrada = new Scanner(System.in);
         int tamanhoCaixa = 80, op = 0;
-        int vet[];
+        int vet[], vettemp[];
                     
 
         String nomeArquivo = "exemploGerado_18caixas_tamanho80"; /*    nome                             tamanhocaixa     -> Arquivos disponíveis para teste
@@ -70,10 +70,11 @@ public class BinPackingProblem {
         }
         
         String caminhoArquivo = ".//src//dataSet//" +nomeArquivo+ ".txt";
-        vet = leituraArquivo(caminhoArquivo);
+        vettemp = leituraArquivo(caminhoArquivo);
         
         String nomeGrafico = "";
         while (op != 0) { 
+            vet = vettemp.clone();
             Packing caixa;
             switch (op) {
                 case 0: //Encerra programa
@@ -181,32 +182,8 @@ public class BinPackingProblem {
             }
             
             nomeGrafico += "_" + nomeArquivo;
-            try {
-                String comando = "python3 src//scripts-analysis//geradorGraficoBarrasEmplilhadas.py " + nomeGrafico;
-                System.out.println(comando);
-                ProcessBuilder builder = new ProcessBuilder(comando.split(" "));
-
-                // Redireciona a saída de erro padrão do processo Python para o Java
-                builder.redirectErrorStream(true);
-
-                Process processo = builder.start();
-
-                // Cria um leitor de entrada para capturar a saída (incluindo a saída de erro) do processo Python
-                BufferedReader reader = new BufferedReader(new InputStreamReader(processo.getInputStream()));
-                String linha;
-
-                while ((linha = reader.readLine()) != null) {
-                    System.out.println(linha); // Exibe a saída do processo Python no console Java
-                }
-
-                int resultado = processo.waitFor();
-                if (resultado == 0) {
-                    System.out.println("Script Python executado com sucesso.");
-                } else {
-                    System.out.println("Erro ao executar o script Python. Codigo de saida: " + resultado);
-                }
-            } catch (IOException | InterruptedException e) {
-                e.printStackTrace();
+            if (op > 2 && op < 10) {
+                executaPython(nomeGrafico);
             }
             op = menu();
         }
@@ -267,6 +244,36 @@ public class BinPackingProblem {
         }
         
         return vet;
+    }
+    
+    public static void executaPython(String nomeGrafico) throws IOException{
+        try {
+            String comando = "python3 src//scripts-analysis//geradorGraficoBarrasEmplilhadas.py " + nomeGrafico;
+            System.out.println(comando);
+            ProcessBuilder builder = new ProcessBuilder(comando.split(" "));
+
+            // Redireciona a saída de erro padrão do processo Python para o Java
+            builder.redirectErrorStream(true);
+
+            Process processo = builder.start();
+
+            // Cria um leitor de entrada para capturar a saída (incluindo a saída de erro) do processo Python
+            BufferedReader reader = new BufferedReader(new InputStreamReader(processo.getInputStream()));
+            String linha;
+
+            while ((linha = reader.readLine()) != null) {
+                System.out.println(linha); // Exibe a saída do processo Python no console Java
+            }
+
+            int resultado = processo.waitFor();
+            if (resultado == 0) {
+                System.out.println("Script Python executado com sucesso.");
+            } else {
+                System.out.println("Erro ao executar o script Python. Codigo de saida: " + resultado);
+            }
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
     }
     
     public static void gerarMediaTempoExecucao(int repeticoes, int tamanhoCaixa, int vet[], String nome){

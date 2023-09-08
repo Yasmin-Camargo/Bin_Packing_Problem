@@ -1,13 +1,10 @@
 package binpackingproblem;
 
-import java.util.Arrays;
-
 public class BruteForce {
 
     private final int vetItens[];
     private final int quantItens;
     private int contadorPermutacoes = 0;
-    private int result[][];
     private final int tamanhoCaixa;
     private int fatorialVet;
     private Packing melhorPermutacao;
@@ -20,9 +17,18 @@ public class BruteForce {
 
     private void gerarPermutacoes(int array[], int tamanhoArray, int index) {
         if (index == tamanhoArray - 1) {
+            int permutacaoAtual[] = new int[tamanhoArray];
             for(int i = 0; i < tamanhoArray; i++) {
-                result[contadorPermutacoes][i] = array[i];
+                permutacaoAtual[i] = array[i];
             }
+            for(int i=0; i< fatorialVet; i++){
+            NextFit ff = new NextFit(permutacaoAtual);
+            Packing caixa = ff.algoritmoNextFit(tamanhoCaixa);
+            
+            if(melhorPermutacao == null || melhorPermutacao.getQuantCaixas() > caixa.getQuantCaixas()) {
+                melhorPermutacao = caixa;
+            }
+        }
             contadorPermutacoes++;
             return;
         }
@@ -48,31 +54,10 @@ public class BruteForce {
 
     public Packing algoritmoBruteForce() {
         fatorialVet = calcularFatorial(quantItens);
-        result = new int[fatorialVet][quantItens]; // Aloque memória para a matriz das permutações possiveis
-
+       
         gerarPermutacoes(vetItens, quantItens, 0);
         
-         for(int i=0; i< fatorialVet; i++){
-            int permutacaoAtual[] = result[i];
-            
-            NextFit ff = new NextFit(permutacaoAtual);
-            Packing caixa = ff.algoritmoNextFit(tamanhoCaixa);
-            
-            if(melhorPermutacao == null || melhorPermutacao.getQuantCaixas() > caixa.getQuantCaixas()) {
-                melhorPermutacao = caixa;
-            }
-        }
-         
          return melhorPermutacao;
     }
     
-    public void printPermutacoes(){
-         for (int i = 0; i < contadorPermutacoes; i++) {
-            System.out.print("[ ");
-            for (int j = 0; j < quantItens; j++) {
-                System.out.print(result[i][j] + " ");
-            }
-            System.out.print("]\n");
-        }
-    }
 }

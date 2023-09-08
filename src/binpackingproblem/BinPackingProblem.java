@@ -25,10 +25,10 @@ public class BinPackingProblem {
 
     public static void main(String[] args) throws IOException {
         Scanner entrada = new Scanner(System.in);
-        int tamanhoCaixa = 80, op = 0;
+        int tamanhoCaixa = 100, op = 0;
         int vet[], vettemp[];
 
-        String nomeArquivo = "dataSet1_FSU_tamanho100"; /*
+        String nomeArquivo = "dataSet3_FSU_tamanho100"; /*
                                                                   * nome tamanhocaixa -> Arquivos disponíveis para teste
                                                                   * exemploGerado_18caixas_tamanho80 80
                                                                   * dataSet1_FSU_tamanho100 100

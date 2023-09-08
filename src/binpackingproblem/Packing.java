@@ -35,6 +35,10 @@ public class Packing {
         return true;
     }
     
+    public int getQuantCaixas(){
+        return numCaixas;
+    }
+    
     public boolean addItem(int item) { //Adiciona o item na primeira caixa com espaço suficiente, caso contrário cria uma nova caixa
         for (int i = 0; i < numCaixas; i++) {
             if (addItem(i, item)) {

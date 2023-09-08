@@ -6,13 +6,12 @@ import numpy as np
 import sys
 
 # Pasta que contém os arquivos de dados
-pasta_arquivos = '../dataSet/resultados'
+pasta_arquivos = 'src/dataSet/resultados'
 if len(sys.argv) != 2:
     print("Uso: python script.py nome_do_arquivo")
     sys.exit() 
 else:
     nomeArquivo = sys.argv[1]
-
 
 # Variáveis 
 dados_eixoX = []  # Armazena os dados do eixo X (conteudo de cada caixa)
@@ -73,5 +72,5 @@ for nome_arquivo in todos_arquivos:
         plt.ylabel('Capacidade')
         plt.xlabel('Número da caixa')
         plt.ylim(0, capacidade_maxima + 1)  # Define o intervalo do eixo Y (mínimo e máximo)
-        plt.savefig(f'graficos/{algoritmo} - Arquivo {experimento}')
+        plt.savefig(f'src/scripts-analysis/graficos/{algoritmo} - Arquivo {experimento}')
         plt.show()

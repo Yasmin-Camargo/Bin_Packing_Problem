@@ -10,6 +10,7 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Scanner;
 
 /**
@@ -70,7 +71,8 @@ public class BinPackingProblem {
         
         String caminhoArquivo = ".//src//dataSet//" +nomeArquivo+ ".txt";
         vet = leituraArquivo(caminhoArquivo);
-         
+        
+        String nomeGrafico = "";
         while (op != 0) { 
             Packing caixa;
             switch (op) {
@@ -103,6 +105,7 @@ public class BinPackingProblem {
                     
                 case 3: //Next Fit (NF)
                     System.out.println("\n--- Next Fit ---");
+                    nomeGrafico = "Next_Fit";
                     NextFit nf = new NextFit(vet);
                     caixa = nf.algoritmoNextFit(tamanhoCaixa);
                     caixa.exportarDados("Next_Fit", nomeArquivo);
@@ -111,6 +114,7 @@ public class BinPackingProblem {
                     
                 case 4: //First Fit (FF)
                     System.out.println("\n\n--- First Fit ---");
+                    nomeGrafico = "First_Fit";
                     FirstFit ff = new FirstFit(vet);
                     caixa = ff.algoritmoFirstFit(tamanhoCaixa);
                     caixa.exportarDados("First_Fit", nomeArquivo);
@@ -119,6 +123,7 @@ public class BinPackingProblem {
                     
                 case 5: //Best Fit (BF)
                     System.out.println("\n\n--- Best Fit ---");
+                    nomeGrafico = "Best_Fit";
                     BestFit bf = new BestFit(vet);
                     caixa = bf.algoritmoBestFit(tamanhoCaixa);
                     caixa.exportarDados("Best_Fit", nomeArquivo);
@@ -127,6 +132,7 @@ public class BinPackingProblem {
                     
                 case 6: //Next Fit Decreasing (NFD)
                     System.out.println("\n\n--- Next Fit Decreasing ---");
+                    nomeGrafico = "Next_Fit_Decreasing";
                     NextFitDecreasing nfd = new NextFitDecreasing(vet);
                     caixa = nfd.algoritmoNextFitDecreasing(tamanhoCaixa);
                     caixa.exportarDados("Next_Fit_Decreasing", nomeArquivo);
@@ -135,6 +141,7 @@ public class BinPackingProblem {
                     
                 case 7: //First Fit Decreasing (FFD)
                     System.out.println("\n\n--- First Fit Decreasing ---");
+                    nomeGrafico = "First_Fit_Decreasing";
                     FirstFitDecreasing ffd = new FirstFitDecreasing(vet);
                     caixa = ffd.algoritmoFirstFitDecreasing(tamanhoCaixa);
                     caixa.exportarDados("First_Fit_Decreasing", nomeArquivo);
@@ -143,6 +150,7 @@ public class BinPackingProblem {
                 
                 case 8: //Modified First Fit Decreasing (MFFD)
                     System.out.println("\n\n--- Modified First Fit Decreasing ---");
+                    nomeGrafico = "Modified_First_Fit_Decreasing";
                     ModifiedFirstFitDecreasing mffd = new ModifiedFirstFitDecreasing(vet);
                     caixa = mffd.algoritmoModifiedFirstFitDecreasing(tamanhoCaixa);
                     caixa.exportarDados("Modified_First_Fit_Decreasing", nomeArquivo);
@@ -150,10 +158,11 @@ public class BinPackingProblem {
                     break;
                     
                 case 9: //Best Fit Decreasing (BFD)
-                    System.out.println("\n\n--- Modified First Fit Decreasing ---");
+                    System.out.println("\n\n--- Best Fit Decreasing ---");
+                    nomeGrafico = "Best_Fit_Decreasing";
                     BestFitDecreasing bfd = new BestFitDecreasing(vet);
                     caixa = bfd.algoritmoBestFitDecreasing(tamanhoCaixa);
-                    caixa.exportarDados("Best Fit Decreasing", nomeArquivo);
+                    caixa.exportarDados("Best_Fit_Decreasing", nomeArquivo);
                     System.out.println(caixa);
                     break;
                  
@@ -169,6 +178,35 @@ public class BinPackingProblem {
                 default:
                     System.out.println("\n\n DIGITE UM NUMERO VALIDO!!!\n");
                     break;
+            }
+            
+            nomeGrafico += "_" + nomeArquivo;
+            try {
+                String comando = "python3 src//scripts-analysis//geradorGraficoBarrasEmplilhadas.py " + nomeGrafico;
+                System.out.println(comando);
+                ProcessBuilder builder = new ProcessBuilder(comando.split(" "));
+
+                // Redireciona a saída de erro padrão do processo Python para o Java
+                builder.redirectErrorStream(true);
+
+                Process processo = builder.start();
+
+                // Cria um leitor de entrada para capturar a saída (incluindo a saída de erro) do processo Python
+                BufferedReader reader = new BufferedReader(new InputStreamReader(processo.getInputStream()));
+                String linha;
+
+                while ((linha = reader.readLine()) != null) {
+                    System.out.println(linha); // Exibe a saída do processo Python no console Java
+                }
+
+                int resultado = processo.waitFor();
+                if (resultado == 0) {
+                    System.out.println("Script Python executado com sucesso.");
+                } else {
+                    System.out.println("Erro ao executar o script Python. Codigo de saida: " + resultado);
+                }
+            } catch (IOException | InterruptedException e) {
+                e.printStackTrace();
             }
             op = menu();
         }

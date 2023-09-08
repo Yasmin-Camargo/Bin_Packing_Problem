@@ -28,7 +28,7 @@ public class BinPackingProblem {
         int tamanhoCaixa = 100, op = 0;
         int vet[], vettemp[];
 
-        String nomeArquivo = "dataSet3_FSU_tamanho100"; /*
+        String nomeArquivo = "dataSet1_FSU_tamanho100"; /*
                                                                   * nome tamanhocaixa -> Arquivos disponíveis para teste
                                                                   * exemploGerado_18caixas_tamanho80 80
                                                                   * dataSet1_FSU_tamanho100 100
@@ -181,8 +181,13 @@ public class BinPackingProblem {
                 case 12:
                     System.out.println("\n\n--- Brute Force ---");
                     nomeGrafico = "Brute_Force";
+                    long tempoInicial = System.nanoTime();
                     BruteForce bfa = new BruteForce(vet, tamanhoCaixa);
                     caixa = bfa.algoritmoBruteForce();
+                    long tempoFinal = System.nanoTime();
+                    long tempoDecorrido = (long) (tempoFinal - tempoInicial);
+                    System.out.println("\nTempo Execução Brute Force");
+                    System.out.println("Nanossegundos: " + tempoDecorrido);
                     caixa.exportarDados("Brute_Force", nomeArquivo);
                     System.out.println(caixa);
                     break;

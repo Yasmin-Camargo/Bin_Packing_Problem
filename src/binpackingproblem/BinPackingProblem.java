@@ -28,7 +28,7 @@ public class BinPackingProblem {
         int tamanhoCaixa = 100, op = 0;
         int vet[], vettemp[];
 
-        String nomeArquivo = "dataSet1_FSU_tamanho100"; /*
+        String nomeArquivo = "dataSet2_FSU_tamanho100"; /*
                                                                   * nome tamanhocaixa -> Arquivos disponíveis para teste
                                                                   * exemploGerado_18caixas_tamanho80 80
                                                                   * dataSet1_FSU_tamanho100 100
@@ -198,7 +198,7 @@ public class BinPackingProblem {
             }
 
             nomeGrafico += "_" + nomeArquivo;
-            if (op > 2 && op < 10) {
+            if (op > 2 && op < 10 || op ==12) {
                 executaPython(nomeGrafico);
             }
             op = menu();

@@ -7,6 +7,7 @@ package binpackingproblem;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -62,6 +63,8 @@ public class BinPackingProblem {
                 op = 10;
             } else if (str.equals("BFA")) {
                 op = 12;
+            } else if (str.equals("exato")) {
+                op = 12;
             }
 
             nomeArquivo = args[2];
@@ -103,6 +106,32 @@ public class BinPackingProblem {
                         System.out.println("Tamanho atualizado: " + tamanhoCaixa);
                     } else {
                         System.out.println("Tamanho da caixa deve ser um numero positivo");
+                    }
+                    
+                    //Listar arquivos do diretório
+                    String diretorio = ".//src//dataSet";
+                    File pasta = new File(diretorio);
+
+                    if (pasta.exists() && pasta.isDirectory()) {
+                        File[] arquivos = pasta.listFiles();
+                        int i=0;
+                        System.out.println("\n\tArquivos: ");
+                        for (File arquivo : arquivos) {
+                            if (arquivo.getName().equals("filmesMarvel.csv")) {
+                                break;
+                            }
+                            System.out.println("\t" + i + ": " + arquivo.getName());
+                            i++;
+                        }
+                        System.out.println("\nPor favor, digite o indice do arquivo que deseja: ");
+                        int indice = entrada.nextInt();
+                        String[] temp = (arquivos[indice].getName()).split("\\.");
+                        nomeArquivo = temp[0];
+                        caminhoArquivo = ".//src//dataSet//" + nomeArquivo + ".txt";
+                        System.out.println("Nome atualizado: " + caminhoArquivo);
+                        
+                    } else {
+                        System.out.println("O diretório especificado não existe ou não é um diretório.");
                     }
                     break;
 
@@ -210,7 +239,7 @@ public class BinPackingProblem {
         int opMenu;
         System.out.println("\n\n\t===== Implementacao do Problema do empacotamento (Bin Packing Problem) =====");
         System.out.println("\t 1) Exibir Lista de Itens");
-        System.out.println("\t 2) Alterar tamanho da Caixa");
+        System.out.println("\t 2) Alterar tamanho da Caixa e Nome do Arquivo");
         System.out.println("\t 3) Next Fit (NF)");
         System.out.println("\t 4) First Fit (FF)");
         System.out.println("\t 5) Best Fit (BF)");

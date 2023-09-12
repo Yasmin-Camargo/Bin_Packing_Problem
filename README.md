@@ -1,7 +1,7 @@
-# :package: Bin_Packing_Problem
+![Apresentação - Bin Packing Problem](https://github.com/Caroline-Camargo/Bin_Packing_Problem/assets/88253809/73d5b7c1-3642-4ac7-9369-6bd9d34330e8)
 Trabalho de Algoritmos e Estruturas de Dados III desenvolvido junto com [@Yasmin-Camargo](https://github.com/Yasmin-Camargo) e [@BiancaBDullius](https://github.com/BiancaBDullius) que possui como objetivo realizar a Implementação do problema do empacotamento de caixas, utilizando um algoritmo exato e algoritmos aproximativos
 
-# Problema de Empacotamento de Caixas
+# :package: Problema de Empacotamento de Caixas
 
 ## :mag_right: Visão Geral
 
@@ -38,7 +38,12 @@ Os algoritmos aproximativos são implementados para encontrar soluções que se 
 
 ## :desktop_computer:	Implementação
 
-Os algoritmos foram implementados em Java, e o código-fonte está disponível nesse repositório do GitHub. O programa permite que o usuário escolha algoritmos, altere o tamanho da caixa e execute o empacotamento. Ele também fornece funcionalidades adicionais, como geração de estatísticas e exportação de resultados para CSV. Há um exemplo prático de aplicação para ajudar a otimizar o tempo de assistir a filmes.
+Os algoritmos foram implementados em Java, e o código-fonte está disponível nesse repositório do GitHub. O programa permite que o usuário escolha algoritmos, altere o tamanho da caixa e execute o empacotamento. Ele também fornece funcionalidades adicionais, como geração de estatísticas e exportação de resultados para CSV. Há também um exemplo prático de uma aplicação real do problema do empacotamento, que consiste em otimizar da melhor maneira possível o tempo levado para assistir uma lista de filmes. 
+
+Para fins de demonstração foi gerado uma lista de filmes da empresa marvel e a configuração escolhida foi a disponibilidade de 6 horas por dia para realizar essa tarefa. O resultado dessa simulação pode ser encontrado na pasta src/dataset/resultados/. Vale ressaltar, que o código permite que esse arquivo seja modificado e outros filmes possam ser adicionados ou removidos da lista, permitindo que seja aplicado para outras listas de filmes.
+
+Como objetivo de automatizar a geração dos resultados, foi desenvolvido scripts em Python utilizando a biblioteca de geração de gráficos matplotlib para criar gráficos de barras empilhadas para representar visualmente a distribuição de itens em caixas para o problema de bin packing. Um modelo do gráfico gerado é possível ser visualizado abaixo:
+![Modified_First_Fit_Decreasing](https://github.com/Caroline-Camargo/Bin_Packing_Problem/assets/88253809/9fde409b-b41a-42d1-bfb8-a56b24236845)
 
 ## :play_or_pause_button: Executando o Programa
 

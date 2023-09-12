@@ -43,6 +43,7 @@ Os algoritmos foram implementados em Java, e o código-fonte está disponível n
 Para fins de demonstração foi gerado uma lista de filmes da empresa marvel e a configuração escolhida foi a disponibilidade de 6 horas por dia para realizar essa tarefa. O resultado dessa simulação pode ser encontrado na pasta src/dataset/resultados/. Vale ressaltar, que o código permite que esse arquivo seja modificado e outros filmes possam ser adicionados ou removidos da lista, permitindo que seja aplicado para outras listas de filmes.
 
 Como objetivo de automatizar a geração dos resultados, foi desenvolvido scripts em Python utilizando a biblioteca de geração de gráficos matplotlib para criar gráficos de barras empilhadas para representar visualmente a distribuição de itens em caixas para o problema de bin packing. Um modelo do gráfico gerado é possível ser visualizado abaixo:
+
 ![Modified_First_Fit_Decreasing](https://github.com/Caroline-Camargo/Bin_Packing_Problem/assets/88253809/9fde409b-b41a-42d1-bfb8-a56b24236845)
 
 ## :play_or_pause_button: Executando o Programa

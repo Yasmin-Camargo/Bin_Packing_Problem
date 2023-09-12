@@ -46,7 +46,7 @@ Este projeto abordou o desafiador **Problema de Empacotamento de Caixas**, explo
 
 ## Executando o Programa
 
-Na pasta raiz do projeto (Bin_Packing_Problem) você pode executar o programa usando o seguinte comando no terminal, podendo passar o
+Na pasta raiz do projeto (Bin_Packing_Problem) você pode executar o programa usando o seguinte comando no terminal, podendo passar o tamanho da caixa, código do algoritmo e o arquivo de entrada, conforme exemplo a seguir:
 
 ```bash
 # Execução normal

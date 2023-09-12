@@ -1,5 +1,9 @@
 package binpackingproblem;
 
+/**
+ * @author Caroline, Yasmin e Bianca
+ */
+
 public class BruteForce {
 
     private final int vetItens[];

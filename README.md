@@ -1,5 +1,5 @@
 ![Apresentação - Bin Packing Problem](https://github.com/Caroline-Camargo/Bin_Packing_Problem/assets/88253809/73d5b7c1-3642-4ac7-9369-6bd9d34330e8)
-Trabalho de Algoritmos e Estruturas de Dados III desenvolvido junto com [@Yasmin-Camargo](https://github.com/Yasmin-Camargo) e [@BiancaBDullius](https://github.com/BiancaBDullius) que possui como objetivo realizar a Implementação do problema do empacotamento de caixas, utilizando um algoritmo exato e algoritmos aproximativos
+Trabalho de Algoritmos e Estruturas de Dados III desenvolvido junto com [@Caroline-Camargo](https://github.com/Caroline-Camargo) e [@BiancaBDullius](https://github.com/BiancaBDullius) que possui como objetivo realizar a Implementação do problema do empacotamento de caixas, utilizando um algoritmo exato e algoritmos aproximativos
 
 # :package: Problema de Empacotamento de Caixas
 
